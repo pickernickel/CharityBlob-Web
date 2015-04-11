@@ -24,9 +24,9 @@
             $conn['queryBlobs'] = $conn['conn']->prepare("SELECT * FROM blobs
                                                             WHERE (latitude BETWEEN ? AND ?)
                                                             AND (longitude BETWEEN ? AND ?);");
-            echo htmlspecialchars($conn['conn']->error);
             $conn['queryCharities'] = $conn['conn']->prepare("SELECT `charities`.`id`,`charities`.`name`,`charities`.`color` FROM `charity`.`charities`;");
-            $conn['prepBlob'] = $conn['conn']->prepare("");
+            $conn['prepBlob'] = $conn['conn']->prepare("INSERT INTO blobs VALUES (default,?,?,?,?,?);");
+            echo htmlspecialchars($conn['conn']->error);
         }
         return $conn;
     }
