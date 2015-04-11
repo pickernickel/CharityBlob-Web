@@ -8,7 +8,7 @@
     Braintree_Configuration::publicKey('wtssppnc8q6mg8n7');
     Braintree_Configuration::privateKey('ab7cdccf15bc21c7e0e3ae84f8fdbfd0');
     
-    $nonce = $_POST['payment_method_nonce'];
+    $nonce = $_POST['nonce'];
     $result = Braintree_Transaction::sale(array(
         'amount' => number_format($_POST['amount']/100.0, 2),
         'paymentMethodNonce' => 'nonce-from-the-client'),

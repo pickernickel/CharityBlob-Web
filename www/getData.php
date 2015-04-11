@@ -2,9 +2,9 @@
     include_once 'session.php';
     include_once 'sql.php';
     
-    $lat = $_GET['lat'];
-    $long = $_GET['long'];
-    $radius = $_GET['radius'];
+    $lat = 0;
+    $long = 0;
+    $radius = 5000;
     
     $llat = $lat - $radius;
     $ulat = $lat + $radius;
@@ -15,10 +15,16 @@
     $conn['queryBlobs']->execute();
     $conn['queryBlobs']->bind_result($id,$lat,$long,$user,$amount,$charityid);
     
-    $result = array();
+    $result['data'] = array();
     while($conn['queryBlobs']->fetch())
     {
-        array_push($result, array($id,$lat,$long,$user,$amount,$charityid));
+        $record['id'] = $id;
+        $record['lat'] = $lat;
+        $record['long'] = $long;
+        $record['name'] = $user;
+        $record['amount'] = $amount;
+        $record['charityid'] = $charityid;
+        array_push($result['data'], $record);
     }
     echo json_encode($result);
 ?>

@@ -5,10 +5,13 @@
     $conn['queryCharities']->execute();
     $conn['queryCharities']->bind_result($id,$name,$color);
     
-    $result = array();
+    $result['data'] = array();
     while($conn['queryCharities']->fetch())
     {
-        array_push($result, array($id,$name,$color));
+        $record['id'] = $id;
+        $record['name'] = $name;
+        $record['color'] = $color;
+        array_push($result['data'], $record);
     }
     echo json_encode($result);
 ?>
